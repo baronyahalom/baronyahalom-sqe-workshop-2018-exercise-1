@@ -12,7 +12,7 @@ describe('The javascript parser', () => {
         );
     });
 
-    it('is parsing a simple variable declaration correctly', () => {
+    it('1.is parsing a simple variable declaration correctly', () => {
         let parse = parseCode('let a = 1;');
         assert.deepEqual(
             sendToTable1(parse),
@@ -21,7 +21,7 @@ describe('The javascript parser', () => {
     });
 });
 describe('The javascript parser', () => {
-    it('is parsing a simple function declaration correctly', () => {
+    it('2.is parsing a simple function declaration correctly', () => {
         let parse = parseCode('function binarySearch(X){}');
         assert.deepEqual(
             sendToTable1(parse),
@@ -29,7 +29,7 @@ describe('The javascript parser', () => {
                 {Line: 1, Type: 'variable declaration', Name: 'X', Condition: '', Value: ''}]
         );
     });
-    it('is parsing a simple assignment expression correctly', () => {
+    it('3.is parsing a simple assignment expression correctly', () => {
         let parse = parseCode('low = 0;');
         assert.deepEqual(
             sendToTable1(parse),
@@ -38,14 +38,14 @@ describe('The javascript parser', () => {
     });
 });
 describe('The javascript parser', () => {
-    it('is parsing a simple while statement correctly', () => {
+    it('4.is parsing a simple while statement correctly', () => {
         let parse = parseCode('while (low <= high){}');
         assert.deepEqual(
             sendToTable1(parse),
             [{Line: 1, Type: 'while statement', Name: '', Condition: 'low<=high', Value: ''}]
         );
     });
-    it('is parsing a simple if statement correctly', () => {
+    it('5.is parsing a simple if statement correctly', () => {
         let parse = parseCode('if (X < V[mid]){x=1;}');
         assert.deepEqual(
             sendToTable1(parse),
@@ -55,14 +55,14 @@ describe('The javascript parser', () => {
     });
 });
 describe('The javascript parser', () => {
-    it('is parsing update expression correctly', () => {
+    it('6.is parsing update expression correctly', () => {
         let parse = parseCode('i++');
         assert.deepEqual(
             sendToTable1(parse),
             [{Line: 1, Type: 'Update Expression', Name: 'i', Condition: '', Value: '++'}]
         );
     });
-    it('is parsing for statement correctly', () => {
+    it('7.is parsing for statement correctly', () => {
         let parse = parseCode('for(let i=0;i<5;i++){let x=i+5;}');
         assert.deepEqual(
             sendToTable1(parse),
@@ -74,7 +74,7 @@ describe('The javascript parser', () => {
     });
 });
 describe('The javascript parser', () => {
-    it('is parsing while statement correctly', () => {
+    it('8.is parsing while statement correctly', () => {
         let parse = parseCode('while(i>5){i++}');
         assert.deepEqual(
             sendToTable1(parse),
@@ -82,7 +82,7 @@ describe('The javascript parser', () => {
                 {Line: 2, Type: 'Update Expression', Name: 'i', Condition: '', Value: '++'}]
         );
     });
-    it('is parsing if-else statement correctly', () => {
+    it('9.is parsing if-else statement correctly', () => {
         let parse = parseCode('if (X < V[mid])\n' +
             ' x=1;\n' +
             'else\n' +
@@ -94,7 +94,7 @@ describe('The javascript parser', () => {
                 {Line: 3, Type: 'Else Statemen', Name: '', Condition: '', Value: ''},
                 {Line: 4, Type: 'assignment expression', Name: 'x', Condition: '', Value: 10}] );});});
 describe('The javascript parser', () => {
-    it('is parsing if-else if statement correctly', () => {
+    it('10.is parsing if-else if statement correctly', () => {
         let parse = parseCode('        if (X < V[mid])\n' +
             '            high = mid - 1;\n' +
             '        else if (X > V[mid])\n' +
@@ -113,7 +113,7 @@ describe('The javascript parser', () => {
     });
 });
 describe('The javascript parser', () => {
-    it('is parsing a  return statment  and unary expression corectly', () => {
+    it('11.is parsing a  return statment  and unary expression corectly', () => {
         let parse = parseCode('function func(){return -1}');
         assert.deepEqual(
             sendToTable1(parse),

@@ -94,10 +94,7 @@ const ifState = (line)=>
     let cond = check(line.test);
     tableParse.push({ Line: counter, Type: 'if statement', Name: '' ,Condition:cond, Value:'' });
     counter++;
-    //if(line.consequent.type === 'BlockStatement')
-    line.consequent = line.consequent.body;
-    for(let i=0; i<line.consequent.length; i++)
-        checkWich[line.consequent[i].type](line.consequent[i]);
+    conseq(line);
     if(line.alternate)
     {
         if(line.alternate.type==='IfStatement')
@@ -107,15 +104,23 @@ const ifState = (line)=>
     }
 };
 
+const conseq = (line)=>
+{
+    if(line.consequent.body !== undefined){
+        line.consequent = line.consequent.body;
+        for(let i=0; i<line.consequent.length; i++)
+            checkWich[line.consequent[i].type](line.consequent[i]);}
+    else
+        checkWich[line.consequent.type](line.consequent);
+}
+
 const elseSta = (type, line)=>
 {
     if(type === 'Else If Statement') {
         let cond = check(line.test);
         tableParse.push({Line: counter, Type: type, Name: '', Condition: cond, Value: ''});
         counter++;
-        line.consequent = line.consequent.body;
-        for(let i=0; i<line.consequent.length; i++)
-            checkWich[line.consequent[i].type](line.consequent[i]);
+        conseq(line);
         if(line.alternate) {
             if(line.alternate.type==='IfStatement')
                 elseSta('Else If Statement',line.alternate);
